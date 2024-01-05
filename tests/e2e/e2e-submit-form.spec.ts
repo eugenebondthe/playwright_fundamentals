@@ -21,4 +21,12 @@ test.describe.parallel("Feedback Form", () => {
     })
 
     // Submit feedback form
+    test("Submit feedback form", async ({ page }) => {
+        await page.fill("#name", "Valera")
+        await page.fill("#email", "valera.pavlov@gmail.com")
+        await page.fill("#subject", "Stop spamming me")
+        await page.fill("#comment", "Please stop sending me emails regarding ur marketing programs!")
+        await page.click("input[type='submit']")
+        await page.waitForSelector("#feedback-title")
+    })
 })
