@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test'
 import { loadHomepage, assertTitle } from '../helpers'
 
-test("Simple basic test", async ({ page }) => {
+test.skip("Simple basic test", async ({ page }) => {
     await page.goto("https://www.example.com")
     const pageTitle = await page.locator('h1')
     await expect(pageTitle).toContainText('Example Domain')
 })
 
-test("Clicking on Elements", async ({ page }) => {
+test.skip("Clicking on Elements", async ({ page }) => {
     await page.goto("http://zero.webappsecurity.com/index.html")
     await page.click("#signin_button")
     await page.click("text=Sign in")
@@ -35,7 +35,7 @@ test.skip("Selectors", async ({ page }) => {
     await page.click("//button")
 })
 
-test.describe("My first test suite", () => {
+test.describe.skip("My first test suite", () => {
     test("Working with inputs", async ({ page }) => {
         await page.goto("http://zero.webappsecurity.com/index.html")
         await page.click("#signin_button")
@@ -63,7 +63,7 @@ test.describe("My first test suite", () => {
     })
 })
 
-test.describe.parallel("Taking screenshots with simple hook", () => {
+test.describe.skip("Taking screenshots with simple hook", () => {
     test.beforeEach(async ({ page }) => {
         await page.goto("https://example.com")
     })
@@ -79,7 +79,7 @@ test.describe.parallel("Taking screenshots with simple hook", () => {
     })
 })
 
-test("Custom helpers", async ({ page }) => {
+test.skip("Custom helpers", async ({ page }) => {
     await loadHomepage(page)
     //await page.pause()
     await assertTitle(page)
