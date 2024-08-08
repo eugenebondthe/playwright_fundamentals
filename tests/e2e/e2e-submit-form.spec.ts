@@ -1,32 +1,30 @@
 import { test, expect } from '@playwright/test'
+import { HomePage } from '../../page-objects/HomePage'
+import { FeedbackPage } from '../../page-objects/FeedbackPage'
 
-test.describe.parallel("Feedback Form", () => {
+test.describe.parallel.only("Feedback Form", () => {
+    let homePage: HomePage
+    let feedbackPage: FeedbackPage
+
     test.beforeEach(async ({ page }) => {
-        await page.goto("http://zero.webappsecurity.com/index.html")
-        await page.click("#feedback")
+        homePage = new HomePage(page)
+        feedbackPage = new FeedbackPage(page)
+
+        await homePage.visit()
+        await homePage.clickOnFeedbackLink()
     })
 
     // Reset feedback form
     test("Reset Feedback Form", async ({ page }) => {
-        await page.fill("#name", "Valera")
-        await page.fill("#email", "valera.pavlov@gmail.com")
-        await page.fill("#subject", "Stop spamming me")
-        await page.fill("#comment", "Please stop sending me emails regarding ur marketing programs!")
-        await page.click("input[name='clear']")
-
-        const nameInput = await page.locator("#name")
-        const commentInput = await page.locator("#comment")
-        await expect(nameInput).toBeEmpty()
-        await expect(commentInput).toBeEmpty()
+        await feedbackPage.fillForm('Valera', 'valera.pavlov@gmail.com', 'Stop spamming me', 'Please stop sending me emails regarding ur marketing programs!')
+        await feedbackPage.resetForm()
+        await feedbackPage.assertFeedbackFormReset()
     })
 
     // Submit feedback form
     test("Submit feedback form", async ({ page }) => {
-        await page.fill("#name", "Valera")
-        await page.fill("#email", "valera.pavlov@gmail.com")
-        await page.fill("#subject", "Stop spamming me")
-        await page.fill("#comment", "Please stop sending me emails regarding ur marketing programs!")
-        await page.click("input[type='submit']")
-        await page.waitForSelector("#feedback-title")
+        await feedbackPage.fillForm('Valera', 'valera.pavlov@gmail.com', 'Stop spamming me', 'Please stop sending me emails regarding ur marketing programs!')
+        await feedbackPage.submitForm()
+        await feedbackPage.assertFeedbackFormSent()
     })
 })
