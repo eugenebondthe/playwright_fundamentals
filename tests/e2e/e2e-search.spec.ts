@@ -7,7 +7,6 @@ test.describe.parallel('Successful Search', () => {
     await homePage.visit()
     await homePage.searchFor('bank')
 
-    const numberOfLinks = await page.locator('li > a')
-    await expect(numberOfLinks).toHaveCount(2)
+    await homePage.assertSearchResults(2)
   })
 })

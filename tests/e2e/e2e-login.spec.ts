@@ -1,15 +1,18 @@
 import { test, expect } from '@playwright/test'
 import { LoginPage } from '../../page-objects/LoginPage'
 import { HomePage } from '../../page-objects/HomePage'
+import { Navbar } from '../../page-objects/components/Navbar'
 
 test.describe.parallel('Login / Logout Flow', () => {
   let loginPage: LoginPage
   let homePage: HomePage
+  let navbar: Navbar
 
   // Before Hook
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
     homePage = new HomePage(page)
+    navbar = new Navbar(page)
 
     await homePage.visit()
   })
@@ -26,12 +29,9 @@ test.describe.parallel('Login / Logout Flow', () => {
     await homePage.clickOnSignIn()
     await loginPage.login('username', 'password')
     await loginPage.loginFix()
-
-    const accountSummaryTab = await page.locator('#account_summary_tab')
-    await expect(accountSummaryTab).toBeVisible()
+    await expect(navbar.accountSummary).toBeVisible()
 
     await page.goto('http://zero.webappsecurity.com/logout.html')
-    const signInBtn = await page.locator('#signin_button')
-    await expect(signInBtn).toBeVisible()
+    await expect(homePage.signInBtn).toBeVisible()
   })
 })

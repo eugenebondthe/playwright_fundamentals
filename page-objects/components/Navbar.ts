@@ -19,7 +19,7 @@ export class Navbar {
     this.onlineStatements = page.locator('#online_statements_tab')
   }
 
-  async clickOnTab(tabName) {
+  async clickOnTab(tabName: string) {
     switch (tabName) {
       case 'Account Summary':
         await this.accountSummary.click()
