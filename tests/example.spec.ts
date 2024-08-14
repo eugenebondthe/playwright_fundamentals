@@ -40,8 +40,8 @@ test.describe.skip('My first test suite', () => {
     await page.goto('http://zero.webappsecurity.com/index.html')
     await page.click('#signin_button')
 
-    await page.type('#user_login', 'artemiuszk')
-    await page.type('#user_password', 'qwerty12345')
+    await page.fill('#user_login', 'artemiuszk')
+    await page.fill('#user_password', 'qwerty12345')
     await page.click('text=Sign in')
 
     const errorMessage = await page.locator('.alert-error')
