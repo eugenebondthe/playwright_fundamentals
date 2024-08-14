@@ -1,28 +1,35 @@
 import { test, expect } from '@playwright/test'
+import { HomePage } from '../../page-objects/HomePage'
+import { LoginPage } from '../../page-objects/LoginPage'
+import { Navbar } from '../../page-objects/components/Navbar'
+import { TransferFundsPage } from '../../page-objects/TransferFundsPage'
 
-test.describe.parallel("Transfer Funds and Make Payments", () => {
-    test.beforeEach(async ({ page }) => {
-        await page.goto("http://zero.webappsecurity.com/index.html")
-        await page.click("#signin_button")
-        await page.fill("#user_login", "username")
-        await page.fill("#user_password", "password")
-        await page.click("text=Sign in")
-        await page.goto("http://zero.webappsecurity.com/bank/transfer-funds.html")
-    })
+test.describe.parallel('Transfer Funds and Make Payments', () => {
+  let homePage: HomePage
+  let loginPage: LoginPage
+  let navbar: Navbar
+  let transferFundsPage: TransferFundsPage
 
-    test("Transfer Funds", async ({ page }) => {
-        await page.click("#transfer_funds_tab")
-        await page.selectOption("#tf_fromAccountId", "2")
-        await page.selectOption("#tf_toAccountId", "3")
-        await page.fill("#tf_amount", "500")
-        await page.fill("#tf_description", "Because I want that")
-        await page.click("#btn_submit")
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page)
+    loginPage = new LoginPage(page)
+    navbar = new Navbar(page)
+    transferFundsPage = new TransferFundsPage(page)
 
-        const boardHeader = await page.locator("h2.board-header")
-        await expect(boardHeader).toContainText("Verify")
-        await page.click("#btn_submit")
+    await homePage.visit()
+    await homePage.clickOnSignIn()
+    await loginPage.login('username', 'password')
+    await loginPage.loginFix()
+  })
 
-        const message = await page.locator(".alert-success")
-        await expect(message).toContainText("You successfully submitted your transaction")
-    })
+  test('Transfer Funds', async ({ page }) => {
+    await navbar.clickOnTab('Transfer Funds')
+    await transferFundsPage.createTransfer(
+      '2',
+      '3',
+      '500',
+      'Because I want that',
+    )
+    await transferFundsPage.assertSuccessMsg()
+  })
 })
