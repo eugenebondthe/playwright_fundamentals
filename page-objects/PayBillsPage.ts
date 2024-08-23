@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
+import { AbstractPage } from './AbstractPage'
 
-export class PayBillsPage {
-  readonly page: Page
+export class PayBillsPage extends AbstractPage {
   readonly paySavedPayee: Locator
   readonly addNewPayee: Locator
   readonly purchaseForeignCur: Locator
@@ -15,7 +15,7 @@ export class PayBillsPage {
   readonly successPurchaseMsg: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.paySavedPayee = page.locator('text=Pay Saved Payee')
     this.addNewPayee = page.locator('text=Add New Payee')
     this.purchaseForeignCur = page.locator('text=Purchase Foreign Currency')

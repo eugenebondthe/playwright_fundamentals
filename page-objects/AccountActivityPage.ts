@@ -1,13 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test'
+import { AbstractPage } from './AbstractPage'
 
-export class AccountActivityPage {
-  readonly page: Page
+export class AccountActivityPage extends AbstractPage {
   readonly accSelector: Locator
   readonly accTransactionTable: Locator
   readonly noResults: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.accSelector = page.locator('#aa_accountId')
     this.accTransactionTable = page.locator(
       '#all_transactions_for_account tbody tr',

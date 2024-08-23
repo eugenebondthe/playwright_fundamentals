@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
+import { AbstractPage } from './AbstractPage'
 
-export class TransferFundsPage {
-  readonly page: Page
+export class TransferFundsPage extends AbstractPage {
   readonly fromAccountId: Locator
   readonly toAccountId: Locator
   readonly transferAmount: Locator
@@ -11,7 +11,7 @@ export class TransferFundsPage {
   readonly successMsg: Locator
 
   constructor(page: Page) {
-    this.page = page
+    super(page)
     this.fromAccountId = page.locator('#tf_fromAccountId')
     this.toAccountId = page.locator('#tf_toAccountId')
     this.transferAmount = page.locator('#tf_amount')
