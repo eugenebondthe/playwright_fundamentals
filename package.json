@@ -13,7 +13,8 @@
     "tests:visual:webkit": "playwright test --config=visual.config.ts --projects=Webkit",
     "tests:visual:chrome:update": "playwright test --config=visual.config.ts --projects=Chromium --update-snapshots",
     "tests:visual:firefox:update": "playwright test --config=visual.config.ts --projects=Firefox --update-snapshots",
-    "tests:visual:webkit:update": "playwright test --config=visual.config.ts --projects=Webkit --update-snapshots"
+    "tests:visual:webkit:update": "playwright test --config=visual.config.ts --projects=Webkit --update-snapshots",
+    "tests:api": "playwright test --config=api.config.ts --project=Chromium"
   },
   "author": "Eugene Bondarenko",
   "license": "ISC",
