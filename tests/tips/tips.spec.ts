@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test'
-import { async } from '../../helpers'
 
 test.describe.only('Tips & tricks section', () => {
   test('TestInfo Object', async ({ page }, testInfo) => {
