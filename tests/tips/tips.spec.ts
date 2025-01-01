@@ -15,7 +15,10 @@ test.describe.only('Tips & tricks section', () => {
   })
 
   test('Test Fixme Annotation', async ({ page, browserName }) => {
-    test.fixme(browserName === "chromium", "Test's not stable, needs refactoring")
+    test.fixme(
+      browserName === 'chromium',
+      "Test's not stable, needs refactoring",
+    )
     await page.goto('https://www.example.com')
   })
 
@@ -34,6 +37,15 @@ test.describe.only('Tips & tricks section', () => {
     await page.mouse.down()
     await page.mouse.move(0, 100)
     await page.mouse.up()
+  })
+
+  test('Multiple browser tabs inside 1 browser', async ({ browser }) => {
+    const context = await browser.newContext()
+    const page1 = await context.newPage()
+    const page2 = await context.newPage()
+    await page1.goto("https://www.example.com")
+    await page2.goto("https://www.example.com")
+    await page1.waitForTimeout(5000)
   })
 })
 
