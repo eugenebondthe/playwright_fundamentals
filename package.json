@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "studying playwright",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium --reporter=list",
     "tests:firefox": "playwright test --config=playwright.config.ts --project=Firefox --reporter=list",
@@ -24,6 +25,7 @@
     "prettier": "^3.1.1"
   },
   "devDependencies": {
+    "@types/node": "^22.10.3",
     "playwright": "^1.46.1",
     "typescript": "^5.5.4"
   }

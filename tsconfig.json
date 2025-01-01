@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "target": "ES2020",                
+    "module": "ESNext",                 
+    "moduleResolution": "Node",         
+    "esModuleInterop": true,            
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "types": ["node", "playwright"]
   },
-  "include": ["**/*.ts"]
+  "include": [
+    "src/**/*.ts",                      
+    "tests/**/*.ts"
+  ]
 }
